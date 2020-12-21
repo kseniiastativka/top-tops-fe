@@ -1,7 +1,7 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head"
+import styles from "../styles/Home.module.css"
 
-const mockData = ['City1', 'City2', 'City3']
+const mockData = ["City1", "City2", "City3"]
 
 export default function Home() {
   return (
@@ -12,21 +12,18 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Ratings!
-        </h1>
+        <h1 className={styles.title}>Ratings!</h1>
 
-          <article>
-            <header>Top German cities</header>
+        <article>
+          <header>Top German cities</header>
 
-            <ul>
-              {mockData.map(item=><li key={item}>{item}</li>)}
-            </ul>
-          </article>
-
+          <ul>
+            {mockData.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
       </main>
-
-
     </div>
   )
 }
