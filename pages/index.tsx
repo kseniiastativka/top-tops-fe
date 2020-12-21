@@ -20,7 +20,7 @@ export default function Home() {
             <header>Top German cities</header>
 
             <ul>
-              {mockData.map(item=><li>{item}</li>)}
+              {mockData.map(item=><li key={item}>{item}</li>)}
             </ul>
           </article>
 
