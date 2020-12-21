@@ -12,3 +12,6 @@ export default {
 const Template: Story<void> = () => <Home />;
 
 export const Primary = Template.bind({});
+Primary.parameters = {
+  percy: {skip: false}
+}
