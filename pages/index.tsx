@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Ratings!</h1>
+        <h2 className={styles.title}>Ratings!</h2>
 
         <article>
           <header>Top German cities</header>
