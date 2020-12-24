@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps<{
     },
   })
 
-  if (res.status === 401) {
+  if (res.status >= 400) {
     return { redirect: { destination: "/login", permanent: false } } as const
   }
 
