@@ -2,49 +2,42 @@ import type { FC } from "react"
 import Link from "next/link"
 import { useUser } from "./UserProvider"
 
+const LINK_CLASS_NAMES = "link py-4"
+
 export const Layout: FC = ({ children }) => {
-  const [userState, userDispatch] = useUser()
+  const [userState] = useUser()
 
   return (
     <>
-      <header>
+      <header className="sticky top-0 z-40 lg:z-50 w-full border-b border-gray-200">
         <nav>
-          <ul>
+          <ul className="container mx-auto px-4 py-1 flex">
             <li>
               <Link href="/">
-                <a>Home</a>
+                <a className={LINK_CLASS_NAMES}>Home</a>
               </Link>
             </li>
 
             {userState.type === "logged-out" && (
-              <li>
+              <li className="ml-auto">
                 <Link href={"/login"}>
-                  <a>Log in</a>
+                  <a className={LINK_CLASS_NAMES}>Log in</a>
                 </Link>
               </li>
             )}
 
             {userState.type === "logged-in" && (
-              <>
-                <li>
-                  <Link href={"/profile"}>
-                    <a>Profile</a>
-                  </Link>
-                </li>
-
-                <li>
-                  Logged in as {userState.name}
-                  <button onClick={() => userDispatch({ type: "log-out" })}>
-                    Log out
-                  </button>
-                </li>
-              </>
+              <li className="ml-2">
+                <Link href={"/profile"}>
+                  <a className={LINK_CLASS_NAMES}>Profile</a>
+                </Link>
+              </li>
             )}
           </ul>
         </nav>
       </header>
 
-      <main>{children}</main>
+      <main className="container mx-auto px-4 py-1">{children}</main>
     </>
   )
 }

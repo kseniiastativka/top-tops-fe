@@ -50,7 +50,7 @@ export const getServerSideProps: GetServerSideProps<{
 const Profile: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   profile,
 }) => {
-  const [userState] = useUser()
+  const [userState, userDispatch] = useUser()
   const router = useRouter()
 
   useEffect(() => {
@@ -72,6 +72,13 @@ const Profile: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
       </Head>
 
       <div>Username: {profile.username}</div>
+
+      <button
+        className="button bg-yellow-400"
+        onClick={() => userDispatch({ type: "log-out" })}
+      >
+        Log out
+      </button>
     </>
   )
 }

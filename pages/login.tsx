@@ -32,6 +32,7 @@ const Login: FC = () => {
       </Head>
 
       <form
+        className="max-w-sm space-y-4"
         onSubmit={(event) => {
           event.preventDefault()
 
@@ -42,9 +43,10 @@ const Login: FC = () => {
           })
         }}
       >
-        <label>
+        <label className="block">
           Username:
           <input
+            className="text-input"
             onChange={({ target: { value } }) => setNameInput(value)}
             type="text"
             required={true}
@@ -52,11 +54,10 @@ const Login: FC = () => {
           />
         </label>
 
-        <br />
-
-        <label>
+        <label className="block">
           Password:
           <input
+            className="text-input"
             onChange={({ target: { value } }) => setPasswordInput(value)}
             type="password"
             required={true}
@@ -64,7 +65,7 @@ const Login: FC = () => {
           />
         </label>
 
-        <input type="submit" />
+        <input className="button bg-green-300" type="submit" />
       </form>
 
       {userState.type === "logging-in" && <div>⏳ Logging in...</div>}

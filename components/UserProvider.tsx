@@ -61,6 +61,27 @@ export const UserProvider: FC<{ initialState: UserState }> = ({
   const [state, dispatch] = useReducer(userReducer, initialState)
 
   useEffect(() => {
+    if (initialState === state) {
+      return
+    }
+
+    switch (initialState.type) {
+      case "logged-in":
+        dispatch({
+          type: "success",
+          id: initialState.id,
+          name: initialState.name,
+          token: initialState.token,
+        })
+        break
+
+      case "logged-out":
+        dispatch({ type: "log-out" })
+        break
+    }
+  }, [initialState])
+
+  useEffect(() => {
     switch (state.type) {
       case "logged-in":
         cookieCutter.set(
