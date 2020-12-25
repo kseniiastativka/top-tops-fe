@@ -12,7 +12,7 @@ const Login: FC = () => {
   useEffect(() => {
     if (userState.type === "logged-in") {
       router
-        .push("/")
+        .push("/my-ratings")
         .then(() => console.info("Redirect logged-in user to the homepage"))
         .catch(() => {
           console.error("Fail to redirect logged-in user to the homepage")

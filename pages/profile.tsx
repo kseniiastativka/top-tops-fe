@@ -28,8 +28,12 @@ export const getServerSideProps: GetServerSideProps<{
     },
   })
 
-  if (res.status >= 400) {
+  if (res.status === 401) {
     return { redirect: { destination: "/login", permanent: false } } as const
+  }
+
+  if (res.status >= 400) {
+    return { redirect: { destination: "/error", permanent: false } } as const
   }
 
   const data = await res.json()
