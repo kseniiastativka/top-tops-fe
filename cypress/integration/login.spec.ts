@@ -6,6 +6,9 @@ describe("Login", () => {
     login.logIn(RICK)
 
     cy.contains("Profile")
+
+    cy.reload()
+
     cy.url().should("not.include", "/login")
   })
 
@@ -13,6 +16,9 @@ describe("Login", () => {
     login.logIn(USER_WITH_INVALID_PASSWORD)
 
     cy.contains("Login failed")
+
+    cy.reload()
+
     cy.url().should("include", "/login")
   })
 })
