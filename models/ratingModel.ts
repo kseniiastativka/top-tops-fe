@@ -4,6 +4,7 @@ export interface RatingModel {
   name: string
   items: Array<{
     name: string
+    id: string
   }>
   visibility: "private" | "public"
 }

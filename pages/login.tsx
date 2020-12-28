@@ -13,7 +13,9 @@ const Login: FC = () => {
     if (userState.type === "logged-in") {
       router
         .push("/my-ratings")
-        .then(() => console.info("Redirect logged-in user to the homepage"))
+        .then(() => {
+          console.info("Redirect logged-in user to the my ratings page")
+        })
         .catch(() => {
           console.error("Fail to redirect logged-in user to the homepage")
         })
