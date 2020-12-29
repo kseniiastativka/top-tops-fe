@@ -1,11 +1,14 @@
 import type { FC } from "react"
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 import Head from "next/head"
+import Link from "next/link"
 import { getFromCookies } from "../../utils/getFromCookies"
 import { API_PREFIX } from "../../constants/api"
 import { parseUser } from "../../utils/parseUser"
 import type { RatingModel } from "../../models/ratingModel"
 import { parseRating } from "../../utils/parseRating"
+import { useUser } from "../../components/UserProvider"
+import { useRouter } from "next/router"
 
 export const getServerSideProps: GetServerSideProps<{
   rating: RatingModel
@@ -53,6 +56,9 @@ const COLOR_CLASS_NAMES = [
 const RatingPage: FC<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ rating }) => {
+  const [userState] = useUser()
+  const router = useRouter()
+
   return (
     <>
       <Head>
@@ -61,6 +67,40 @@ const RatingPage: FC<
       </Head>
 
       <h1>{rating.name}</h1>
+
+      <Link href={`/edit-rating/${rating.id}`}>
+        <a>Edit</a>
+      </Link>
+
+      <button
+        className="button ml-4 bg-red-400"
+        onClick={async () => {
+          if (
+            userState.type === "logged-in" &&
+            confirm(`Are you sure you want to delete "${rating.name}"?`)
+          ) {
+            const res = await fetch(`${API_PREFIX}/my-ratings/${rating.id}`, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userState.token}`,
+              },
+            })
+
+            if (res.status === 401) {
+              await router.push("/login")
+            }
+
+            if (res.status >= 400) {
+              await router.push("/login")
+            }
+
+            await router.push("/my-ratings")
+          }
+        }}
+      >
+        Delete
+      </button>
 
       <ol className="list-decimal list-inside mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
         {rating.items.map((item, i) => {

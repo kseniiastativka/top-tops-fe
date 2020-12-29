@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 import Head from "next/head"
+import Link from "next/link"
 import { getFromCookies } from "../utils/getFromCookies"
 import { parseRatings } from "../utils/parseRatings"
 import { API_PREFIX } from "../constants/api"
@@ -54,6 +55,10 @@ const Ratings: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
       </Head>
 
       <h1 className="sr-only">Ratings</h1>
+
+      <Link href={"/add-rating"}>
+        <a>Add new rating</a>
+      </Link>
 
       {userRatings.length > 0 && (
         <section className="mt-6">
