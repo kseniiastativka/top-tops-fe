@@ -178,7 +178,11 @@ export const RatingForm: FC<{ rating?: RatingModel }> = ({ rating }) => {
                 )}
               </FieldArray>
 
-              <input className="button bg-green-400" type="submit" />
+              <input
+                className="button bg-green-400"
+                value="Submit"
+                type="submit"
+              />
             </form>
           )
         }}

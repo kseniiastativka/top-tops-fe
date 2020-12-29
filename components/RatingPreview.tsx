@@ -21,7 +21,7 @@ export const RatingPreview: FC<{
             <ul>
               {rating.items.map((item) => {
                 return (
-                  <li className="px-4 py-2" key={item.name}>
+                  <li className="px-4 py-2" key={item.id}>
                     {item.name}
                   </li>
                 )
