@@ -1,25 +1,34 @@
 import { login } from "../page-objects/login.page"
 import { RICK } from "../constants/users"
-import { navigationBar } from "../page-objects/navigation-bar.page"
+import { navigation } from "../page-objects/navigation-bar.page"
 import { ratings } from "../page-objects/ratings.page"
 import "@percy/cypress"
-import { ratingForm } from "../page-objects/rating-input.page"
+import { ratingForm } from "../page-objects/rating-form.page"
 import { rating } from "../page-objects/rating.page"
 
 describe("Rating", () => {
   it("can be created, edited and deleted", function () {
-    login.logIn(RICK)
-    navigationBar.navigateTo("My Rating")
+    login.logInAs(RICK)
+    navigation.navigateToMyRatings()
     ratings.goToAddNewRating()
-    ratingForm.fillOutAndSubmitForm("Test rating")
+    ratingForm.typeRatingName("Test rating")
+    ratingForm.selectRatingType("Private")
+    ratingForm.typeRatingItem("Item 1", 1)
+    ratingForm.addNewRatingItem()
+    ratingForm.typeRatingItem("Item 2", 2)
+    ratingForm.submitForm()
 
-    cy.contains("a", "Edit")
+    cy.contains("h1", "Test rating")
     cy.percySnapshot("Added rating")
 
     rating.edit()
-    ratingForm.editAndSubmitForm()
+    ratingForm.typeRatingName("Test updated")
+    ratingForm.selectRatingType("Public")
+    ratingForm.typeRatingItem("Item 1 updated", 1)
+    ratingForm.removeRatingItem(2)
+    ratingForm.submitForm()
 
-    cy.contains("a", "Edit")
+    cy.contains("h1", "Test updated")
     cy.percySnapshot("Edited rating")
 
     rating.delete()

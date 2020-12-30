@@ -1,5 +1,5 @@
 export const login = {
-  logIn({ login, password }: { login: string; password: string }) {
+  logInAs({ login, password }: { login: string; password: string }) {
     cy.visit("/")
     cy.contains("a", "Log in").click()
     cy.contains("label", "Username").type(login)

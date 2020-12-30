@@ -2,15 +2,16 @@ export const ratingForm = {
   fillOutAndSubmitForm(ratingName: string) {
     this.typeRatingName(ratingName)
     this.selectRatingType("Private")
-    this.typeRatingItem("Item 1")
+    this.typeRatingItem("Item 1", 1)
 
     this.addNewRatingItem()
 
-    cy.get("ol > li:nth-child(2)")
-      .contains("label", "Item name")
-      .click()
-      .type("Item 2")
+    this.typeRatingItem("Item 2", 2)
 
+    this.submitForm()
+  },
+
+  submitForm() {
     cy.get("form").submit()
   },
 
@@ -23,17 +24,24 @@ export const ratingForm = {
   selectRatingType(option: "Public" | "Private") {
     cy.contains("label", "Visibility").find("select").select(option)
   },
-  typeRatingItem(text: string) {
-    cy.contains("label", "Item name").find("input").clear().type(text)
+  typeRatingItem(text: string, index: 1 | 2) {
+    cy.get(`ol > li:nth-child(${index})`)
+      .contains("label", "Item name")
+      .find("input")
+      .clear()
+      .type(text)
+  },
+  removeRatingItem(index: 1 | 2) {
+    cy.get(`ol > li:nth-child(${index})`)
+      .contains("button", "Remove rating item")
+      .click()
   },
 
   editAndSubmitForm() {
     this.typeRatingName("Test updated")
     this.selectRatingType("Public")
-    this.typeRatingItem("Item 1 updated")
-    cy.get("ol > li:nth-child(2)")
-      .contains("button", "Remove rating item")
-      .click()
-    cy.get("form").submit()
+    this.typeRatingItem("Item 1 updated", 1)
+    this.removeRatingItem(2)
+    this.submitForm()
   },
 }

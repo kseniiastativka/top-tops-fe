@@ -1,5 +1,9 @@
-export const navigationBar = {
-  navigateTo(tabName: string) {
-    cy.contains("a", tabName).click()
+export const navigation = {
+  navigateToMyRatings() {
+    cy.contains("a", "My Rating").click()
+  },
+
+  navigateToProfile() {
+    cy.contains("a", "Profile").click()
   },
 }
