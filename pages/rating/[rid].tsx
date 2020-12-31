@@ -117,7 +117,7 @@ const RatingPage: FC<
           return (
             <li
               className={`p-3 font-semibold rounded-md bg-gradient-to-br ${colorClassNames}`}
-              key={item.name}
+              key={item.id}
             >
               {item.name}
             </li>

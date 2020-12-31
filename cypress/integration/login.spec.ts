@@ -3,7 +3,7 @@ import { login } from "../page-objects/login.page"
 
 describe("Login", () => {
   it("is successful with valid credentials ", () => {
-    login.logIn(RICK)
+    login.logInAs(RICK)
 
     cy.contains("Profile")
 
@@ -13,7 +13,7 @@ describe("Login", () => {
   })
 
   it("fails with invalid credentials", function () {
-    login.logIn(USER_WITH_INVALID_PASSWORD)
+    login.logInAs(USER_WITH_INVALID_PASSWORD)
 
     cy.contains("Login failed")
 
